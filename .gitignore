@@ -1,17 +1,28 @@
-.DS_Store
-.env
-.env.debug
-.env.local
-.env.testing
-.idea/
-.phpintel
-/node_modules/
+# Dependencies
 /vendor/
-bootstrap/cache/
-npm-debug.log
-public/build/
-public/hot
-public/storage
-storage/app/public/
-yarn-debug.log
-yarn-error.log
+/node_modules/
+
+# Environment files
+.env
+.env.*.local
+.phpunit.result.cache
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Composer
+composer.lock
+
+# Testing
+.phpunit.result.cache
