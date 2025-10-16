@@ -137,6 +137,14 @@ $posts = Post::deletedBy(3)->get();
 
 ## Testing
 
+To successfully run the tests, you must set the `TEST_DB_PASSWORD` environment variable from a terminal as follows:
+
+```bash
+set TEST_DB_PASSWORD=Your-local-MySQL-password
+```
+
+Only then will the tests be able to run.
+
 ```bash
 composer test
 ```
@@ -154,8 +162,10 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details (⚠️ Not available yet
 If you discover any security related issues, please email ernestochapon@gmail.com instead of using the issue tracker.
 
 ## Credits
-* ([Ernesto Chapon](https://github.com/3rn3st0))
-* All contributors (⚠️ Not available yet).
+
+Author: [Ernesto Chapon](https://github.com/3rn3st0).
+
+All contributors (⚠️ Not available yet).
 
 ## License
 
