@@ -44,7 +44,8 @@
     "scripts": {
         "release:patch": "git tag v$(php -r \"echo explode('.', file_get_contents('composer.json'))[2]\") && git push --tags",
         "release:minor": "echo 'Update version in composer.json then run release:patch'",
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test": "vendor\\bin\\phpunit",
+        "test-coverage": "vendor\\bin\\phpunit --coverage-html coverage",
+        "test-verbose": "vendor\\bin\\phpunit --verbose"
     }
 }
