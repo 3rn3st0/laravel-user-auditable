@@ -28,18 +28,22 @@ trait UserAuditable
 
         static::deleting(function (Model $model) {
             if (Auth::check() && Schema::hasColumn($model->getTable(), 'deleted_by')) {
-                if (method_exists($model, 'bootSoftDeletes')) {
+                // Only for soft deletes
+                if (method_exists($model, 'trashed')) {
                     $model->deleted_by = Auth::id();
                     $model->save();
                 }
             }
         });
 
-        static::restoring(function (Model $model) {
-            if (Schema::hasColumn($model->getTable(), 'deleted_by')) {
-                $model->deleted_by = null;
-            }
-        });
+        // Only record restoring if the model uses SoftDeletes
+        if (method_exists(static::class, 'restoring')) {
+            static::restoring(function (Model $model) {
+                if (Schema::hasColumn($model->getTable(), 'deleted_by')) {
+                    $model->deleted_by = null;
+                }
+            });
+        }
     }
 
     /**
