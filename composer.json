@@ -1,0 +1,41 @@
+{
+    "name": "ernestoch/laravel-user-auditable",
+    "description": "Laravel package for user auditing in migrations and models",
+    "type": "library",
+    "keywords": ["laravel", "audit", "user", "migration", "model", "tracking"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ernesto Chapon",
+            "email": "ernestochapon@gmail.com",
+            "homepage": "https://github.com/3rn3st0"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "laravel/framework": "^9.0|^10.0|^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0|^8.0",
+        "phpunit/phpunit": "^9.5|^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ErnestoCh\\UserAuditable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ErnestoCh\\UserAuditable\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ErnestoCh\\UserAuditable\\Providers\\UserAuditableServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
