@@ -25,20 +25,12 @@ class TestCase extends Orchestra
 
     protected function getEnvironmentSetUp($app)
     {
-        // Always use MySQL - remove SQLite fallback for now
-        config()->set('database.default', 'mysql');
-        config()->set('database.connections.mysql', [
-            'driver' => 'mysql',
-            'host' => env('TEST_DB_HOST', '127.0.0.1'),
-            'port' => env('TEST_DB_PORT', '3306'),
-            'database' => env('TEST_DB_DATABASE', 'test_database'),
-            'username' => env('TEST_DB_USERNAME', 'root'),
-            'password' => env('TEST_DB_PASSWORD', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+        // Use SQLite consistently for all environments
+        config()->set('database.default', 'sqlite');
+        config()->set('database.connections.sqlite', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
             'prefix' => '',
-            'strict' => true,
-            'engine' => null,
         ]);
 
         // Authentication configuration
