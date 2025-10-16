@@ -126,14 +126,14 @@ $posts = Post::deletedBy(3)->get();
 
 ## Available Macros
 
-| Macro | Description | Parameters |
-------------------------------------
-| userAuditable() | Adds user auditing columns | $userTable = 'users', $keyType = 'id' |
-| dropUserAuditable() | Removes user auditing columns | $dropForeign = true |
-| fullAuditable() | Adds timestamps, soft deletes, and user auditing | $userTable = 'users', $keyType = 'id' |
-| uuidColumn() | Adds UUID column | $columnName = 'uuid' |
-| ulidColumn() | Adds ULID column | $columnName = 'ulid' |
-| statusColumn() | Adds status enum column | $columnName = 'status', $default = 'active' |
+| Macro               | Description                                      | Parameters                                  |
+|---------------------|--------------------------------------------------|---------------------------------------------|
+| userAuditable()     | Adds user auditing columns                       | $userTable = 'users', $keyType = 'id'       |
+| dropUserAuditable() | Removes user auditing columns                    | $dropForeign = true                         |
+| fullAuditable()     | Adds timestamps, soft deletes, and user auditing | $userTable = 'users', $keyType = 'id'       |
+| uuidColumn()        | Adds UUID column                                 | $columnName = 'uuid'                        |
+| ulidColumn()        | Adds ULID column                                 | $columnName = 'ulid'                        |
+| statusColumn()      | Adds status enum column                          | $columnName = 'status', $default = 'active' |
 
 ## Testing
 
@@ -147,7 +147,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see CONTRIBUTING for details (⚠️ Not available yet).
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details (⚠️ Not available yet).
 
 ## Security
 
