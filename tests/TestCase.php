@@ -12,11 +12,8 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        // Configure the authentication guard to use our TestUser
+        // Configure authentication guard
         config(['auth.providers.users.model' => TestUser::class]);
-
-        // Run test migrations
-        $this->setUpDatabase();
     }
 
     protected function getPackageProviders($app)
@@ -36,7 +33,7 @@ class TestCase extends Orchestra
             'port' => env('TEST_DB_PORT', '3306'),
             'database' => env('TEST_DB_DATABASE', 'test_database'),
             'username' => env('TEST_DB_USERNAME', 'root'),
-            'password' => env('TEST_DB_PASSWORD', ''),
+            'password' => env('TEST_DB_PASSWORD', ''), // Empty by default
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -55,10 +52,5 @@ class TestCase extends Orchestra
             'driver' => 'eloquent',
             'model' => TestUser::class,
         ]);
-    }
-
-    protected function setUpDatabase(): void
-    {
-        // Tables are created in specific tests
     }
 }
