@@ -113,6 +113,7 @@ $deleter = $post->deleter;
 ### Query Scopes
 
 Filter records by user actions:
+
 ```php
 // Get all posts created by user with ID 1
 $posts = Post::createdBy(1)->get();
@@ -137,16 +138,27 @@ $posts = Post::deletedBy(3)->get();
 
 ## Testing
 
-To successfully run the tests, you must set the `TEST_DB_PASSWORD` environment variable from a terminal as follows:
+To successfully run the tests using MySQL driver, you must set the ``DB_CONNECTION`, `DB_DATABASE` (It MUST be declared as shown below) and `TEST_DB_PASSWORD` environment variables from a terminal as follows:
 
 ```bash
+set DB_CONNECTION=mysql
+set DB_DATABASE=
 set TEST_DB_PASSWORD=Your-local-MySQL-password
+```
+
+For SQLite driver, `TEST_DB_PASSWORD` is not required. Set same environment variables `DB_CONNECTION` and `DB_DATABASE` from a terminal as follows:
+
+```bash
+set DB_CONNECTION=sqlite
+set DB_DATABASE=:mmory:
 ```
 
 Only then will the tests be able to run.
 
 ```bash
-composer test
+./vendor/bin/phpunit        // In Linux or macOS
+
+vendor\bin\phpunit          // In Windows
 ```
 
 ## Changelog
