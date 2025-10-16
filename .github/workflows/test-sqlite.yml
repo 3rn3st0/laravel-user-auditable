@@ -30,4 +30,7 @@ jobs:
         composer update --prefer-dist --no-interaction --no-progress
 
     - name: Execute tests
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: ":memory:"
       run: vendor/bin/phpunit
