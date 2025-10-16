@@ -2,8 +2,8 @@
 
 namespace ErnestoCh\UserAuditable\Tests;
 
-use ErnestoCh\UserAuditable\UserAuditableServiceProvider;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use ErnestoCh\UserAuditable\Providers\UserAuditableServiceProvider;
+use ErnestoCh\UserAuditable\Tests\TestModels\TestUser;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -12,9 +12,11 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'ErnestoCh\\UserAuditable\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        // Configure the authentication guard to use our TestUser
+        config(['auth.providers.users.model' => TestUser::class]);
+
+        // Run test migrations
+        $this->setUpDatabase();
     }
 
     protected function getPackageProviders($app)
@@ -26,9 +28,37 @@ class TestCase extends Orchestra
 
     protected function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        // Use environment variables with safe defaults
+        config()->set('database.default', 'mysql');
+        config()->set('database.connections.mysql', [
+            'driver' => 'mysql',
+            'host' => env('TEST_DB_HOST', '127.0.0.1'),
+            'port' => env('TEST_DB_PORT', '3306'),
+            'database' => env('TEST_DB_DATABASE', 'test_database'),
+            'username' => env('TEST_DB_USERNAME', 'root'),
+            'password' => env('TEST_DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ]);
 
-        // Migrations para testing
-        include_once __DIR__ . '/../database/migrations/create_test_tables.php.stub';
+        // Authentication configuration
+        config()->set('auth.defaults.guard', 'web');
+        config()->set('auth.guards.web', [
+            'driver' => 'session',
+            'provider' => 'users',
+        ]);
+
+        config()->set('auth.providers.users', [
+            'driver' => 'eloquent',
+            'model' => TestUser::class,
+        ]);
+    }
+
+    protected function setUpDatabase(): void
+    {
+        // Tables are created in specific tests
     }
 }
