@@ -7,24 +7,41 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [8.1, 8.2, 8.3]
-        laravel: [9.*, 10.*, 11.*]
+        php: [8.1, 8.2, 8.3, 8.4]
+        laravel: [9.*, 10.*, 11.*, 12.*]
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: test_database
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
     - uses: actions/checkout@v3
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
         coverage: none
 
     - name: Install dependencies
       run: |
         composer require "laravel/framework:${{ matrix.laravel }}" --no-update
-        composer update --prefer-dist --no-interaction
+        composer update --prefer-dist --no-interaction --no-progress
 
     - name: Execute tests
+      env:
+        TEST_DB_HOST: 127.0.0.1
+        TEST_DB_PORT: 3306
+        TEST_DB_DATABASE: test_database
+        TEST_DB_USERNAME: root
+        TEST_DB_PASSWORD: ''
       run: vendor/bin/phpunit
