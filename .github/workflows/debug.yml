@@ -1,0 +1,31 @@
+name: Debug Tests
+
+on: [push]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, mysqlnd, sqlite, pdo_sqlite
+
+    - name: Debug MySQL
+      run: |
+        sudo systemctl status mysql || echo "MySQL not running"
+        which mysql || echo "MySQL client not found"
+        php -m | grep mysql || echo "MySQL extension not loaded"
+
+    - name: Install dependencies
+      run: |
+        composer install --no-interaction --no-progress
+
+    - name: Check environment
+      run: |
+        php -r "echo 'PHP version: ' . PHP_VERSION . PHP_EOL;"
+        php -r "print_r(get_loaded_extensions());"
