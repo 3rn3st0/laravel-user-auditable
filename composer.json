@@ -1,8 +1,8 @@
 {
-    "name": "ernestoch/laravel-user-auditable",
+    "name": "ernestoch/user-auditable-for-laravel",
     "description": "Laravel package for user auditing in migrations and models",
     "type": "library",
-    "keywords": ["laravel", "audit", "user", "migration", "model", "tracking"],
+    "keywords": ["laravel", "audit", "user", "migration", "model", "tracking", "audit", "auditable", "macros"],
     "license": "MIT",
     "authors": [
         {
