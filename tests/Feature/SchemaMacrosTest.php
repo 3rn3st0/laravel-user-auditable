@@ -93,15 +93,18 @@ class SchemaMacrosTest extends TestCase
     public function test_drop_user_auditable_macro()
     {
         // Make sure we are using MySQL
-        $this->assertEquals('mysql', config('database.default'));
+        // $this->assertEquals('mysql', config('database.default'));
+
+        // Skip foreign key drops in SQLite
+        $isSQLite = config('database.default') === 'sqlite';
 
         Schema::create('test_table_4', function (Blueprint $table) {
             $table->id();
             $table->userAuditable();
         });
 
-        Schema::table('test_table_4', function (Blueprint $table) {
-            $table->dropUserAuditable();
+        Schema::table('test_table_4', function (Blueprint $table) use ($isSQLite) {
+            $table->dropUserAuditable(!$isSQLite);
         });
 
         $this->assertFalse(Schema::hasColumns('test_table_4', [
