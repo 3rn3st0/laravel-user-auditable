@@ -9,7 +9,7 @@ class TestUser extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'users'; // Changed from 'test_users' to 'users'
+    protected $table = 'users';
 
     protected $fillable = [
         'name',
