@@ -2,19 +2,19 @@
 
 namespace ErnestoCh\UserAuditable\Tests\Feature;
 
-use ErnestoCh\UserAuditable\Tests\DatabaseRefresh;
+// use ErnestoCh\UserAuditable\Tests\DatabaseRefresh;
 use ErnestoCh\UserAuditable\Tests\TestCase;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class SchemaMacrosTest extends TestCase
 {
-    use DatabaseRefresh;
+    // use DatabaseRefresh;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->refreshDatabase();
+        // $this->refreshDatabase();
 
         // Create user table for foreign keys
         Schema::create('users', function (Blueprint $table) {
@@ -35,8 +35,8 @@ class SchemaMacrosTest extends TestCase
         Schema::dropIfExists('test_table_2');
         Schema::dropIfExists('test_table_3');
         Schema::dropIfExists('test_table_4');
-        Schema::dropIfExists('users');
         Schema::dropIfExists('users_uuid');
+        Schema::dropIfExists('users');
 
         parent::tearDown();
     }
