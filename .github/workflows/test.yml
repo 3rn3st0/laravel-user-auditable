@@ -32,4 +32,5 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: ":memory:"
+        TEST_DB_CONNECTION: sqlite
       run: vendor/bin/phpunit
