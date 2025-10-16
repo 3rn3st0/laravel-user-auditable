@@ -75,9 +75,9 @@ Use the `UserAuditable` trait in your Eloquent models:
 
 namespace App\Models;
 
+use ErnestoCh\UserAuditable\Traits\UserAuditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use TuUsuario\UserAuditable\Traits\UserAuditable;
 
 class Post extends Model
 {
